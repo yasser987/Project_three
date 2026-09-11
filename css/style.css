@@ -1,13 +1,26 @@
-/* Start Global Rules */
+/* Start Variables */
 :root {
+  /* Colors */
   --main-color: #2196f3;
   --main-color-alt: #1787e0;
   --border-color: #e9e6e6;
+  --section-background: #ececec;
+
+  /* Spaces */
+  --section-padding: clamp(5rem, 8vw, 9rem);
+
+  /* Sizes */
+  --paraphColor: #777;
+  --norParphSize: clamp();
+  --bigParphSize: clamp(1.2rem, 1.2vw, 1.2rem);
+  --headerParphSize: clamp();
 
   /* Transition Cascades */
   --transition-duration: 0.3s;
   --transition-timout: ease-in-out;
 }
+/* End Vairables */
+/* Start Global Rules */
 html {
   scroll-behavior: smooth;
 }
@@ -24,6 +37,7 @@ h1 {
 }
 img {
   max-width: 100%;
+  display: block;
 }
 a {
   text-decoration: none;
@@ -39,6 +53,11 @@ ul {
 }
 .container {
   margin-inline: auto;
+}
+@media (max-width: 767px) {
+  .container {
+    padding-inline: 2rem;
+  }
 }
 @media (min-width: 768px) {
   .container {
@@ -56,50 +75,136 @@ ul {
   }
 }
 /* End Global Rules */
+/* Start Animations */
+
+/* Animation [1] */
+@keyframes up-image-down {
+  0%,
+  100% {
+    top: 0;
+  }
+  50% {
+    top: 30px;
+  }
+}
+
+/* Animation [2] */
+@keyframes bouncing {
+  0%,
+  10%,
+  20%,
+  50%,
+  80%,
+  100% {
+    inset-block-end: 20px;
+  }
+  40%,
+  60% {
+    inset-block-end: 30px;
+  }
+}
+
+/* Animation [3]  */
+@keyframes moving-arrow {
+  100% {
+    transform: translateX(10px);
+  }
+}
+/* End Animations */
 /* Start Components */
-.special-heading {
-  border: 1px solid var(--main-color);
+
+/* Component [1]: main-title */
+.special-title {
+  border: 1px solid black;
+  color: black;
   width: fit-content;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  text-transform: uppercase;
   margin-inline: auto;
-  margin-block: 5rem;
-  padding: 5px 25px;
+  margin-block-end: 5rem;
+  padding: 10px 35px;
   position: relative;
-  transition: all var(--transition-duration) var(--transition-timout) 0.3s;
-  max-width: 100%;
+  isolation: isolate;
+  transition:
+    color var(--transition-duration) var(--transition-timout),
+    border-color var(--transition-duration) var(--transition-timout);
 }
-.special-heading:hover {
-  background-color: var(--main-color-alt);
+
+.special-title:hover {
   color: #fff;
+  border-color: #fff;
+  transition-delay: 0.5s;
 }
-.special-heading::before,
-.special-heading::after {
+
+.special-title::before,
+.special-title::after {
   content: "";
   position: absolute;
+  z-index: -1;
+  top: 50%;
+  transform: translateY(-50%);
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: var(--main-color);
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all var(--transition-duration) var(--transition-timout);
 }
-.special-heading::before {
-  inset-inline-start: -15px;
+
+.special-title::before {
+  inset-inline-start: -20px;
+  transition:
+    width 0.25s linear,
+    height 0.25s linear,
+    border-radius 0.25s linear,
+    inset-inline-start 0.25s linear 0.25s;
 }
-.special-heading::after {
-  inset-inline-end: -15px;
+
+.special-title::after {
+  inset-inline-end: -20px;
+  transition:
+    width 0.25s linear,
+    height 0.25s linear,
+    border-radius 0.25s linear,
+    inset-inline-end 0.25s linear 0.25s;
 }
-.special-heading:hover::before {
-  inset-inline-start: 0px;
+
+.special-title:hover::before {
+  inset-inline-start: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  transition:
+    inset-inline-start 0.25s linear,
+    width 0.25s linear 0.25s,
+    height 0.25s linear 0.25s,
+    border-radius 0.25s linear 0.25s;
 }
-.special-heading:hover::after {
-  inset-inline-end: 0px;
+
+.special-title:hover::after {
+  inset-inline-end: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  transition:
+    inset-inline-end 0.25s linear,
+    width 0.25s linear 0.25s,
+    height 0.25s linear 0.25s,
+    border-radius 0.25s linear 0.25s;
 }
+
 /* End Components */
 /* Start Header Section */
+.first-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
 .page-header {
   background-color: #fff;
   box-shadow: rgb(131 131 131) 0px 0px 100px -24px;
+  position: relative;
+  z-index: 10;
+  flex: 0 0 auto;
 }
 .page-header .container {
   display: flex;
@@ -108,7 +213,7 @@ ul {
   align-items: center;
   position: relative;
 }
-@media (max-width: 515px) {
+@media (max-width: 600px) {
   .page-header .container {
     justify-content: center;
   }
@@ -124,6 +229,11 @@ ul {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+@media (max-width: 500px) {
+  .page-header .container > nav.page-nav {
+    justify-content: center;
+  }
 }
 .page-header .container > nav.page-nav > ul {
   display: flex;
@@ -185,7 +295,7 @@ ul {
   )
   > .drop-container {
   opacity: 1;
-  top: 100%;
+  top: calc(100% + 1px);
   visibility: visible;
 }
 @media (max-width: 768px) {
@@ -213,7 +323,7 @@ ul {
   display: flex;
   justify-content: space-evenly;
 }
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   .page-header .container > .drop-container .links {
     flex-direction: column;
   }
@@ -257,6 +367,293 @@ ul {
   width: 100%;
 }
 /* End Header Section */
-body {
-  background-color: rgb(236, 236, 236);
+/* Start Landing Section */
+.landing {
+  flex: 1;
+  position: relative;
 }
+.landing::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--section-background);
+  transform: skewY(-6deg);
+  transform-origin: left bottom;
+  z-index: -1;
+}
+.first-screen .landing .container {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: clamp(4rem, 3vw, 8rem);
+}
+@media (min-width: 992px) {
+  .first-screen .landing .container {
+    margin-block-start: 0;
+  }
+}
+.landing .container .landing-content {
+  width: 600px;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .landing .container .landing-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    text-align: start;
+  }
+}
+.landing .landing-content > .landing-text > h1 {
+  font-weight: 900;
+  color: var(--main-color);
+  font-size: clamp(2.2rem, 5vh, 10rem);
+  margin-block-end: 2rem;
+}
+@media (min-width: 992px) {
+  .landing .landing-content > .landing-text {
+    width: 500px;
+  }
+}
+.landing .landing-content > .landing-text > p {
+  color: var(--paraphColor);
+  font-size: clamp(1.3rem, 2.5vh, 5rem);
+  line-height: 1.5;
+}
+.landing .container .landing-content > figure.landing-page {
+  display: none;
+}
+@media (min-width: 992px) {
+  .landing .container .landing-content > figure.landing-page {
+    display: flex;
+  }
+  .landing .landing-content > figure.landing-page > img {
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    max-width: 100%;
+    width: 500px;
+    position: relative;
+    animation: up-image-down 2s linear infinite;
+  }
+}
+.landing .container > .landing-icon {
+  position: absolute;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  inset-block-end: 20px;
+  color: var(--main-color-alt);
+  font-size: 1.8rem;
+  transition: all var(--transition-duration) var(--transition-timout);
+  animation: bouncing 1.5s infinite;
+}
+/* End Landing Section */
+/* Start Article Section */
+.articles {
+  padding-block: var(--section-padding);
+}
+.articles .artc-cont {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: clamp(2rem, 2.5vw, 3rem);
+}
+.articles .artc-cont .artc-bx {
+  box-shadow: 0 2px 15px rgb(0 0 0 / 20%);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+.articles .artc-cont .artc-bx:hover {
+  transform: translateY(-15px);
+}
+.articles .artc-cont figure img {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.articles .artc-bx .art-text .text {
+  padding: 20px 20px;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+}
+.articles .artc-cont .art-text h3 {
+  margin-block: 15px;
+  font-weight: bolder;
+}
+.articles .artc-cont .art-text p {
+  color: var(--paraphColor);
+  font-size: var(--norParphSize);
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+}
+.articles .artc-cont .art-text a {
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+  color: var(--main-color-alt);
+}
+.articles .artc-cont .art-text a i {
+  font-size: 14px;
+  position: relative;
+}
+.articles .artc-bx:hover .art-text i {
+  animation: moving-arrow 0.5s linear infinite;
+}
+/* End Article Section */
+/* Start Gallery Section */
+.gallery {
+  padding-block: var(--section-padding);
+  background-color: var(--section-background);
+}
+.gallery .gallery-cont {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: clamp(2rem, 3vw, 4rem);
+}
+.gallery .gallery-cont figure {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.gallery .gallery-cont figure::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(226, 222, 222, 0.3);
+  transition: all 0.3s linear;
+}
+.gallery .gallery-cont figure:hover::after {
+  width: 100%;
+  height: 100%;
+}
+.gallery .gallery-cont figure img {
+  object-fit: cover;
+  aspect-ratio: 4 / 4;
+  width: 90%;
+  height: 90%;
+  transition: all 0.2s linear;
+}
+.gallery .gallery-cont figure:hover img {
+  transform: rotate(5deg) scale(1.2);
+}
+/* End Gallery Section */
+/* Start Features Section */
+.features {
+  padding-block: var(--section-padding);
+}
+.feat-cont {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: clamp(2rem, 3vw, 4rem);
+}
+.features .feat-cont .feat-box {
+  text-align: center;
+  border: 1px solid rgb(204 204 204);
+  box-shadow: 0 2px 15px rgb(204, 204, 204, 0.8);
+}
+.features .feat-cont .feat-box:first-child {
+  --section-color: rgb(244, 64, 54);
+}
+.features .feat-cont .feat-box:nth-child(2) {
+  --section-color: rgb(0, 150, 136);
+}
+.features .feat-cont .feat-box:last-child {
+  --section-color: rgb(3, 169, 244);
+}
+.features .feat-cont .feat-box img {
+  position: relative;
+  z-index: 2;
+}
+.features .feat-cont .feat-box img::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: var(--section-color);
+  opacity: 0.2;
+}
+.features .feat-box .feat-text {
+  position: relative;
+  margin-block: 20px;
+  padding: clamp(1.2rem, 2vw, 2.1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.features .feat-box .feat-text::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 100%;
+  height: 80px;
+  background-color: white;
+
+  clip-path: polygon(0 100%, 100% 30%, 100% 100%);
+}
+.features .feat-box .feat-text h3 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  position: relative;
+  width: fit-content;
+  margin-inline: auto;
+}
+.features .feat-box .feat-text h3::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15px;
+  background-color: var(--section-color);
+}
+.features .feat-box .feat-text p {
+  font-size: clamp(1.3rem, 2.5vh, 5rem);
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  color: var(--paraphColor);
+}
+.features .feat-box .feat-text a {
+  width: fit-content;
+  padding: 12px 40px;
+  margin-inline: auto;
+  border: 3px solid var(--section-color);
+  border-radius: 10px;
+  font-size: clamp(0.9rem, 1.5vw, 2rem);
+  color: var(--section-color);
+  font-weight: bold;
+  position: relative;
+  transition: color 0.2s linear;
+}
+.features .feat-box:hover .feat-text a {
+  color: #fff;
+}
+.features .feat-box .feat-text a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: var(--section-color);
+  z-index: -1;
+  transition: width 0.2s linear;
+}
+.features .feat-box:hover .feat-text a::before {
+  width: 100%;
+}
+/* End Features Section */
