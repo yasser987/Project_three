@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Explore articles, galleries, features, and useful links."
+      content="Yasser Elbanna’s frontend portfolio showcasing responsive web projects, modern CSS, accessibility, and professional development practices."
     />
     <title>Yasser - Frontend Developer</title>
     <!-- Normalize CSS -->
@@ -34,11 +34,11 @@
               <li><a href="#gallery">Gallery</a></li>
               <li><a href="#features">Feature</a></li>
               <li>
-                <button>Other Links</button>
+                <button type="button" aria-expanded="false" aria-controls="additional-links">Other Links</button>
               </li>
             </ul>
           </nav>
-          <nav class="drop-container">
+          <nav class="drop-container" id="additional-links" aria-label="Additional links">
             <figure>
               <img src="project_three_images/megamenu.png" alt="" />
             </figure>
@@ -781,9 +781,10 @@
                 </div>
               </div>
             </div>
-            <form class="bottom-content" action="">
-              <input type="email" placeholder="Enter Your Email" />
-              <input type="submit" />
+            <form class="bottom-content" action="#">
+              <label class="visually-hidden" for="newsletter-email">Email address</label>
+              <input id="newsletter-email" type="email" name="email" autocomplete="email" placeholder="Enter Your Email" required />
+              <input type="submit" value="Subscribe" />
             </form>
           </div>
         </div>
@@ -949,25 +950,35 @@
           </div>
           <div class="discount-form">
             <h2>Request A Discount</h2>
-            <form action="/form-page">
-              <input type="text" name="Name" placeholder="Your Name" required />
+            <form action="#">
+              <label class="visually-hidden" for="contact-name">Your name</label>
+              <input id="contact-name" type="text" name="name" autocomplete="name" placeholder="Your Name" required />
+              <label class="visually-hidden" for="contact-email">Your email</label>
               <input
+                id="contact-email"
                 type="email"
-                name="Email"
+                name="email"
+                autocomplete="email"
                 placeholder="Your Email"
                 required
               />
+              <label class="visually-hidden" for="contact-phone">Your phone</label>
               <input
-                type="number"
-                name="Phone Number"
+                id="contact-phone"
+                type="tel"
+                name="phone"
+                autocomplete="tel"
                 placeholder="Your Phone"
                 required
               />
+              <label class="visually-hidden" for="contact-message">Your message</label>
               <textarea
+                id="contact-message"
                 name="message"
                 placeholder="Tell Us About Your Needs"
+                required
               ></textarea>
-              <input type="submit" />
+              <input type="submit" value="Send Message" />
             </form>
           </div>
         </div>
