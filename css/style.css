@@ -1577,7 +1577,7 @@ ul {
 }
 @media (max-width: 768px) {
   .discount .container .discount-form {
-    padding: 0;
+    padding: 40px 0 0 0;
   }
 }
 .discount .container .discount-form h2 {
@@ -1728,6 +1728,11 @@ footer .container .fourth-column {
   flex-wrap: wrap;
   align-content: flex-start;
   gap: 10px;
+}
+@media (max-width: 768px) {
+  footer .container .fourth-column {
+    justify-content: center;
+  }
 }
 footer .container .fourth-column .image {
   padding: 5px;
